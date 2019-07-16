@@ -103,10 +103,25 @@ class Index extends Component {
         title: '生成名片中...'
       })
       const { apprentice = {}, mingpianShow = false, qr_code } = this.state
-      const { name, nick, went = '闵行区，普陀区、嘉定区', slogan,
-              img_url = 'http://cdn.family123.info/FuUVeGa1gp0nZFicH0HJHLNK6kmi',
-              video_url = 'http://puir34i0r.bkt.clouddn.com/FtMzgQdNgOoVkobVQeV1RZvuVk9-', } = apprentice
-
+      const { name, nick, went, slogan,
+              img_url,
+              video_url, } = apprentice
+			
+			
+			let nameNick = '昵称：'+nick
+			let n=0;
+			let arr=[];
+			let newWent = ''
+			while(apprentice.went.indexOf('，',n) != -1){
+					var m=apprentice.went.indexOf('，',n);
+					n=m+1;
+					arr.push(m);
+			}
+			if(arr.length>9){
+				newWent = apprentice.went.substring(0,arr[9]) +'...'
+			}else{
+				newWent = apprentice.went
+			}
       Taro.downloadFile({
         url: `${ img_url }&imageView2/2/w/224/h/224/q/100`,
         success: res => {
@@ -122,7 +137,7 @@ class Index extends Component {
 
             ctx.setFontSize(14);
             ctx.fillStyle = "#104C5F";
-            ctx.fillText(name, 159, 173)
+            ctx.fillText(nameNick, 159, 173)
             ctx.setFontSize(12);
             ctx.fillText('我的宣言：', 159, 195)
             ctx.setFontSize(12);
@@ -131,7 +146,7 @@ class Index extends Component {
             ctx.setFontSize(12);
             ctx.fillText('我旅游过的城市：', 159, 245)
             ctx.setFontSize(12);
-            ctx.fillText(went, 159, 260, 200)
+            ctx.fillText(newWent, 159, 260, 200)
             ctx.drawImage(qr_code, 44, 273, 64, 64)
             // ctx.drawImage(img_ma, 44, 272, 64, 64)
             ctx.draw(false, () => {
@@ -222,6 +237,10 @@ class Index extends Component {
     console.log(e, e.currentTarget)
 
   }
+  onPreview (current) {
+		console.log(current)
+    Taro.previewImage({ current, urls: [current] })
+  }
   render () {
     const { apprentice = {}, mingpianShow = false, niubi_img } = this.state
     const { name, nick, went = '闵行区，普陀区、嘉定区', slogan,
@@ -263,16 +282,19 @@ class Index extends Component {
         </View>
         <View style='position: relative'>
           <Image src={ img_4 } style='width: 100%; display: flex' mode='widthFix' />
-          <View className='flex flex-justify-between flex-align-center' style='position: absolute; top: 20px; width:100%;padding:0 30px;box-sizing:border-box;'>
-            <View style='padding: 5px; background: #fff; '>
+						<View className='flex flex-justify-between flex-align-center' style='position: absolute; top: 5px; width:100%;padding:0 35px;box-sizing:border-box;color: #98264C;font-size:14px;'>个人照片：</View>						
+          <View className='flex flex-justify-between flex-align-center' style='position: absolute; top: 30px; width:100%;padding:0 30px;box-sizing:border-box;'>
+            <View style='padding: 5px; background: #fff; ' onClick={this.onPreview.bind(this, img_url)}>
               <Image src={ `${ img_url }&imageView2/2/w/224/h/224/q/100` } style='max-width:90px;display:flex;max-height:90px;' mode='aspectFit' />
             </View>
-            <View style='padding: 5px; background: #fff;'>
+						{img_url2 &&
+            <View style='padding: 5px; background: #fff;' onClick={this.onPreview.bind(this, img_url2)}>
               <Image src={ `${ img_url2 }&imageView2/2/w/224/h/224/q/100` } style='max-width:90px;display:flex;max-height:90px;' mode='aspectFit' />
-            </View>
-            <View style='padding: 5px; background: #fff; '>
+            </View>}
+						{img_url3 &&
+            <View style='padding: 5px; background: #fff; ' onClick={this.onPreview.bind(this, img_url3)}>
               <Image src={ `${ img_url3 }&imageView2/2/w/224/h/224/q/100` } style='max-width:90px;display:flex;max-height:90px;' mode='aspectFit' />
-            </View>
+            </View>}
           </View>
         </View>
         <View style='position: relative'>

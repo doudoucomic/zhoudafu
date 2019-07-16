@@ -28,13 +28,20 @@ class App extends Component {
 
   }
   componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+//    console.log(this.props, nextProps)
   }
   componentWillUnmount () { }
   componentDidShow () {
+    const { activityName } = this.state
     Taro.setNavigationBarTitle({
       title: '排名'
     })
+
+
+    if (activityName) {
+      this.fetchRank(activityName)
+    }
+
   }
   fetchRank(activityName) {
     const userInfo = Taro.getStorageSync('userInfo')
@@ -48,18 +55,24 @@ class App extends Component {
         'access_token': openid
       },
       success: res => {
-        console.log(res.data)
+//        console.log(res.data)
         const { data } = res
-        const { my, ranking } = data
+        const { my, ranking, stat } = data
         if (my && ranking) {
           this.setState({
             currentTab: activityName,
-            my, ranking,
+            my,
+						stat,
+            ranking,
           })
         } else {
           this.setState({
             currentTab: activityName,
             ranking: [],
+            my: {
+              rank: 0,
+              ticket_received: 0
+            }
           })
         }
       }
@@ -76,11 +89,16 @@ class App extends Component {
         'access_token': openid
       },
       success: res => {
-        console.log(res.data)
+//        console.log(res.data)
         const { data } = res
         const { activity } = data
         if (activity && activity.id && activity.name) {
-          this.fetchRank(activity.name)
+          this.setState({
+            activityName: activity.name
+          }, () => {
+            this.fetchRank(activity.name)
+          })
+
         }
       }
     })
@@ -88,7 +106,8 @@ class App extends Component {
   componentDidHide () { }
   handleClick(name) {
     this.setState({
-      currentTab: name
+      currentTab: name,
+      activityName: name,
     }, () => {
       this.fetchRank(name)
     })
@@ -99,7 +118,10 @@ class App extends Component {
     })
   }
   render () {
-    const { currentTab, my = {}, ranking = [],  } = this.state
+    const { currentTab, my = {}, stat = {}, ranking = [],  } = this.state
+		console.log('2')
+		console.log(my)
+		console.log(this.state)
     const { rank = 0, ticket_received = 0 } = my
     return (
       <View style='height: 100%'>
@@ -119,9 +141,16 @@ class App extends Component {
           }
         </View>
         <View style={ `height: calc(100% - 44px);background: url(${ bgImg });background-size:100%;background-position:100% 100%;background-repeat:no-repeat;position:relative;background-color:#7ccce6;` }>
-          <View className='flex flex-justify-center flex-align-center' style='margin-bottom: 12px; padding-top: 31px; width: 100%; font-size: 14px; color: #104C5F'>
+          <View className='flex flex-justify-center flex-align-center' style='margin-bottom: 12px; padding-top: 51px; width: 100%; font-size: 14px; color: #104C5F'>
 						{currentTab === '50强' && <View style={ `position:absolute;top:5px;left:20px` }>50强公布时间：2019/7/29 17：00</View> }
 						{currentTab !== '50强' && currentTab !== '15强' && currentTab !== '3强' && <View style={ `position:absolute;top:5px;left:20px` }>海选时间：2019/7/15 00：00-2019/7/28 24：00</View> }
+						{currentTab !== '50强' && currentTab !== '15强' && currentTab !== '3强' && 
+							<View style={ `position:absolute;top:27px;display:inline-block` }>
+								<View style={ `display:inline-block` }>参与选手：{stat.total_apprentice}</View>							
+								<View style={ `display:inline-block;margin-left: 10px; ` }>累积投票：{stat.total_ticket}</View>
+							</View> }
+
+						
             <View>我的排名</View>
             <View style='margin: 0 23px 0 10px; color: #9B143B; font-size: 20px; font-weight: 700'>{ rank || '-' }</View>
             <View>我的票数</View>

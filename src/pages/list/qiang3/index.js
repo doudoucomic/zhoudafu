@@ -42,7 +42,7 @@ class App extends Component {
             </View>
             <Image src={ img_2 } style='width: 97px; height: 91px; display: flex; z-index: 99; position:absolute; top: 0; left: 0' mode='widthFix' />
             <View style='margin-top: 35px; text-align: center; color: #104C5F; font-size: 12px'>
-              { rank2.name }
+              { rank2.nick }
             </View>
             <View style='margin-top: 8px; text-align: center; color: #104C5F; font-size:12px'>
               <Text style='color: #9B143B'>{ rank2.ticket_received }</Text> 票
@@ -59,7 +59,7 @@ class App extends Component {
             </View>
             <Image src={ img_1 } style='width: 123px; height: 116px; display: flex; z-index: 99; position:absolute; top: 0; left: 0' mode='widthFix' />
             <View style='margin-top: 35px; text-align: center; color: #104C5F; font-size: 12px'>
-              { rank1.name }
+              { rank1.nick }
             </View>
             <View style='margin-top: 8px; text-align: center; color: #104C5F; font-size:12px'>
               <Text style='color: #9B143B'>{ rank1.ticket_received }</Text> 票
@@ -76,7 +76,7 @@ class App extends Component {
             </View>
             <Image src={ img_3 }  style='width: 97px; height: 91px; display: flex; z-index: 99; position:absolute; top: 0; left: 0' mode='widthFix' />
             <View style='margin-top: 35px; text-align: center; color: #104C5F; font-size: 12px'>
-              { rank3.name }
+              { rank3.nick }
             </View>
             <View style='margin-top: 8px; text-align: center; color: #104C5F; font-size:12px'>
               <Text style='color: #9B143B'>{ rank3.ticket_received }</Text> 票

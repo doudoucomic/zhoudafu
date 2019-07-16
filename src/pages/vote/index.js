@@ -111,8 +111,14 @@ class Index extends Component {
         const { data } = res
         // console.log(data)
         const { success, ticket_left } = data
+				console.log('2222')
+				console.log(ticket_left)
+				let  ticket = data.ticket_left
+				if(ticket<0){
+					ticket = 0
+				}
         let title = '投票成功'
-        const content = `剩余投票次数：${ ticket_left || 0 }次`
+        const content = `剩余投票次数：${ ticket || 0 }次`
         if (success === false) {
           title = '投票失败'
         }
@@ -146,6 +152,10 @@ class Index extends Component {
     videoContext.requestFullScreen()
 
   }
+  onPreview (current) {
+		console.log(current)
+    Taro.previewImage({ current, urls: [current] })
+  }
   render () {
     const { apprentice = {} } = this.state
     const { name, nick, went = '闵行区，普陀区、嘉定区', slogan,
@@ -153,15 +163,16 @@ class Index extends Component {
             img_url2 = '', img_url3 = '',
             video_url = 'http://puir34i0r.bkt.clouddn.com/FtMzgQdNgOoVkobVQeV1RZvuVk9-', } = apprentice
 
-    console.log(apprentice)
+
     return (
       <View className='index' style='background: #7ccce6;height:100%; padding-top: 20px;'>
         <View style='position: relative; '>
           <View className='flex flex-justify-between flex-align-center' style='width: 100%; padding: 15px 30px; box-sizing: border-box;'>
-            <Text style='font-size: 16px; color: #0E3C53;'>{ nick || name }</Text>
+            <Text style='font-size: 16px; color: #0E3C53;'>昵称: { nick || name }</Text>
             {
               video_url && (
-                <View>
+                <View className='flex flex-justify-between flex-align-center'>
+									<Text style='font-size: 16px; color: #0E3C53; margin-right: 10px'>个人视频:   </Text>
                   <Image onClick={ this.handleVideoPlay.bind(this) } src={ img_v } style='width: 100px; display: flex' mode='widthFix'  />
                   <Video
                     src={ video_url }
@@ -187,18 +198,23 @@ class Index extends Component {
           <Image src={ img_3 } style='width: 100%; display: flex' mode='widthFix' />
           <View style={ ` overflow: scroll;height:36px;position: absolute; top: 42px; left: 33px;font-size: 12px; color: #0E3C53; width:80%` }>{ went }</View>
         </View>
+				
         <View style='position: relative' >
           <Image src={ img_4 } style='width: 100%; display: flex' mode='widthFix' />
-          <View className='flex flex-justify-between flex-align-center' style='position: absolute; top: 20px; width:100%;padding:0 30px;box-sizing:border-box;'>
-            <View style='padding: 5px; background: #fff;'>
-              <Image src={ `${ img_url }&imageView2/2/w/224/h/224/q/100` } style='max-width:90px;display:flex;max-height:90px;' mode='aspectFit' />
+						<View className='flex flex-justify-between flex-align-center' style='position: absolute; top: 5px; width:100%;padding:0 35px;box-sizing:border-box;color: #98264C;font-size:14px;'>个人照片：</View>		
+          <View className='flex flex-justify-between flex-align-center' style='position: absolute; top: 30px; width:100%;padding:0 30px;box-sizing:border-box;'>
+						
+            <View style='padding: 5px; background: #fff;' onClick={this.onPreview.bind(this, img_url)}>
+              <Image  src={ `${ img_url }&imageView2/2/w/224/h/224/q/100` } style='max-width:90px;display:flex;max-height:90px;' mode='aspectFit' />
             </View>
-            <View style='padding: 5px; background: #fff;'>
+						{img_url2 &&
+            <View style='padding: 5px; background: #fff;' onClick={this.onPreview.bind(this, img_url2)}>
               <Image src={ `${ img_url2 }&imageView2/2/w/224/h/224/q/100` } style='max-width:90px;display:flex;max-height:90px;' mode='aspectFit' />
-            </View>
-            <View style='padding: 5px; background: #fff; '>
+            </View>}
+						{img_url3 &&
+            <View style='padding: 5px; background: #fff; ' onClick={this.onPreview.bind(this, img_url3)}>
               <Image src={ `${ img_url3 }&imageView2/2/w/224/h/224/q/100` } style='max-width:90px;display:flex;max-height:90px;' mode='aspectFit' />
-            </View>
+            </View>}
           </View>
         </View>
         <View style='position: relative'>
