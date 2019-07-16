@@ -1,0 +1,44 @@
+{
+	"miniprogramRoot": "dist/",
+	"projectname": "fu",
+	"description": "",
+	"appid": "wx6633c17c8be56cd3",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false
+	},
+	"compileType": "miniprogram",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "扫码进入",
+					"pathName": "pages/vote/index",
+					"query": "scene=uid%3D59",
+					"scene": 1012
+				}
+			]
+		}
+	}
+}

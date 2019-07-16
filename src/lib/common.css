@@ -1,0 +1,75 @@
+.flex {
+  display: flex;
+}
+.flex-direction-row {
+  flex-direction: row
+}
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.flex-justify-start {
+  justify-content: flex-start;
+}
+.flex-justify-end {
+  justify-content: flex-end;
+}
+.flex-justify-center {
+  justify-content: center;
+}
+.flex-justify-between {
+  justify-content: space-between;
+}
+.flex-justify-around {
+  justify-content: space-around;
+}
+
+.flex-align-start {
+  align-items: flex-start;
+}
+.flex-align-end {
+  align-items: flex-end;
+}
+.flex-align-center {
+  align-items: center;
+}
+.flex-align-baseline {
+  align-items: baseline;
+}
+.blod {
+  font-weight: 700
+}
+.wp100 {
+  width: 100% !important
+}
+.hp100 {
+  height: 100% !important
+}
+.text-align-right {
+  text-align: right !important;
+}
+.text-align-left {
+  text-align: left;
+}
+.text-align-justify {
+   text-align: justify;
+}
+.text-align-center {
+   text-align: center;
+}
+
+.o-hidden {
+  overflow: hidden;
+}
+.bg-white {
+  background-color: #fff
+}
+.box {
+  box-sizing: border-box;
+}
+page {
+  height: 100%
+}
+.main-color {
+  color: #ED622B
+}

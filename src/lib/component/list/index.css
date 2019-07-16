@@ -1,0 +1,17 @@
+
+.list-container {
+  padding: 40px 0;
+  border-bottom: 1px solid #ddd;
+}
+.list-container .list-label {
+  color: #333;
+  font-size: 32px;
+  margin-right: 40px;
+  font-weight: 300;
+}
+.list-container .list-content input {
+  color: #333;
+  font-size: 32px;
+  /* font-size: 44px;*/
+  text-align: left;
+}

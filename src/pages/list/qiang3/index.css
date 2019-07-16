@@ -1,0 +1,50 @@
+.index {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.list-container {
+  padding: 40px 0;
+  border-bottom: 1px solid rgba(238,238,238,1);
+}
+.list-container .list-label {
+  color: #333;
+  font-size: 32px;
+  margin-right: 40px;
+  font-weight: 300;
+}
+.list-container .list-content, .list-container .list-content input {
+  color: #333;
+  font-size: 32px;
+  text-align: left;
+}
+.form {
+  padding: 35px 30px
+}
+.btn {
+  width:600px;
+  height:88px;
+  margin-top: 88px;
+  background:rgba(237,98,43,1);
+  opacity:1;
+  border-radius:8px;
+  color: #fff;
+  line-height: 88px;
+  margin: 40px auto
+}
+.tag {
+  padding: 6px 12px;
+  font-size: 24px;
+  color: #666;
+  background-color: #F3F3F3;
+  border-radius: 8px;
+}
+.btn-ghost {
+  width:320px;
+  height:88px;
+  border:2px solid rgba(237,98,43,1);
+  opacity:1;
+  border-radius:8px;
+  color: #ED622B;
+  font-weight: 700;
+}
