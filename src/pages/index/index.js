@@ -6,7 +6,7 @@ import img_3 from '@/img/page1/3.png'
 import img_4 from '@/img/page1/4.png'
 import img_5 from '@/img/page1/5.png'
 import img_6 from '@/img/page1/6.png'
-
+import img_c from '@/img/page1/c.png'
 import './index.css'
 
 class Index extends Component {
@@ -77,6 +77,12 @@ class Index extends Component {
       showRule: false
     })
   }
+  handleToList() {
+    console.log(123)
+    Taro.navigateTo({
+      url: '../list/tab/index'
+    })
+  }
   render () {
     const { showRule } = this.state
     let mainStyle = 'background: #7ccce6;height:100%;'
@@ -87,6 +93,7 @@ class Index extends Component {
       <View className='index' style={mainStyle}>
         <View>
           <Image src={ img_1 } style='width: 100%; display: flex' mode='widthFix' />
+          <Image src={ img_c } style='width: 50px; position: absolute; right: 8px; top: 68px' mode='widthFix' />
         </View>
         <Image src={ img_2 } style='width: 100%; display: flex' mode='widthFix' />
         <Image src={ img_3 } style='width: 100%; display: flex' mode='widthFix' />
@@ -97,7 +104,12 @@ class Index extends Component {
         </View>
         <View style='position: relative'>
           <Image src={ img_6 } style='width: 100%; display: flex' mode='widthFix' />
-          <Button open-type='getUserInfo' onGetUserInfo={ this.handleClick.bind(this) }  style='position: absolute; height: 40px; width: 210px; top: 0; left: calc(50% - 105px);background:transparent'>
+          <Button open-type='getUserInfo' onGetUserInfo={ this.handleClick.bind(this) }
+          style='position:absolute;height:40px;width:101px;top:0;left:50px;background:transparent;'>
+            <View></View>
+          </Button>
+          <Button onClick={ this.handleToList.bind(this) }
+            style='position:absolute;height:40px;width:101px;top:0;right:50px;background:transparent;'>
             <View></View>
           </Button>
         </View>

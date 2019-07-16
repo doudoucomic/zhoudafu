@@ -36,8 +36,8 @@ class App extends Component {
         style='height: 100%; width: calc(100% - 30px); box-sizing: border-box; padding: 9px 11px; margin: 0 15px; background: rgba(255,255,255,.5); border-radius: 5px; '>
         {
           list.map((o, i) => {
-            const { name, avatar, rank, ticket_received, id } = o
-            const listCount = i + 1
+            const { nick, name, avatar, rank, ticket_received, id } = o
+            const listCount = rank // i + 1
             // console.log(id)
             return (
               <View onClick={ () => this.handleToupiaoClick(id) } className='flex flex-justify-between flex-align-center' style='padding: 10px 8px; border-bottom: 2px dashed #53A1BA' >
@@ -50,7 +50,7 @@ class App extends Component {
                       )
                     }
                   </View>
-                  <Text>{ name }</Text>
+                  <Text>{ nick }</Text>
                 </View>
                 <Text style='color: #104C5F; font-size:14px'>
                   <Text style='color: #9B143B'>{ ticket_received }</Text> 票

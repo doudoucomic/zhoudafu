@@ -32,9 +32,16 @@ class App extends Component {
   }
   componentWillUnmount () { }
   componentDidShow () {
+    const { activityName } = this.state
     Taro.setNavigationBarTitle({
       title: '排名'
     })
+
+
+    if (activityName) {
+      this.fetchRank(activityName)
+    }
+
   }
   fetchRank(activityName) {
     const userInfo = Taro.getStorageSync('userInfo')
@@ -54,12 +61,17 @@ class App extends Component {
         if (my && ranking) {
           this.setState({
             currentTab: activityName,
-            my, ranking,
+            my,
+            ranking,
           })
         } else {
           this.setState({
             currentTab: activityName,
             ranking: [],
+            my: {
+              rank: 0,
+              ticket_received: 0
+            }
           })
         }
       }
@@ -80,7 +92,12 @@ class App extends Component {
         const { data } = res
         const { activity } = data
         if (activity && activity.id && activity.name) {
-          this.fetchRank(activity.name)
+          this.setState({
+            activityName: activity.name
+          }, () => {
+            this.fetchRank(activity.name)
+          })
+
         }
       }
     })
@@ -88,7 +105,8 @@ class App extends Component {
   componentDidHide () { }
   handleClick(name) {
     this.setState({
-      currentTab: name
+      currentTab: name,
+      activityName: name,
     }, () => {
       this.fetchRank(name)
     })
@@ -118,7 +136,18 @@ class App extends Component {
             })
           }
         </View>
-        <View style={ `height: calc(100% - 44px);background: url(${ bgImg });background-size:100%;background-position:100% 100%;background-repeat:no-repeat;background-color:#7ccce6;` }>
+
+        <View style={ `position:relative; height: calc(100% - 44px); background: url(${ bgImg });background-size:100%;background-position:100% 100%;background-repeat:no-repeat;background-color:#7ccce6;` }>
+          <View style={ `position: absolute; font-size:12px;color:#fff; font-weight: 700; top: 10px; left: ${
+                          currentTab === '海选' ? 20
+                                 : currentTab === '50强'
+                                   ? 20 : 0 }px` }>
+            {
+              currentTab === '海选' ? '海选时间：2019/7/15 00：00-2019/7/28 24：00'
+                                   : currentTab === '50强'
+                                     ? '50强公布时间：2019/7/29 17：00' : ''
+            }
+          </View>
           <View className='flex flex-justify-center flex-align-center' style='margin-bottom: 12px; padding-top: 31px; width: 100%; font-size: 14px; color: #104C5F'>
             <View>我的排名</View>
             <View style='margin: 0 23px 0 10px; color: #9B143B; font-size: 20px; font-weight: 700'>{ rank || '-' }</View>
