@@ -1,7 +1,6 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
-import { Provider } from '@tarojs/redux'
-
+import { Provider } from '@tarojs/mobx'
 import Index from './pages/index'
 
 import configStore from './store'
@@ -48,9 +47,9 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Provider store={store}>
+			<Provider store={store}>	
         <Index />
-      </Provider>
+			</Provider>
     )
   }
 }

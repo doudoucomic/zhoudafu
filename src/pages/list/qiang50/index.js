@@ -28,6 +28,7 @@ class App extends Component {
     const { ranking: list = [] } = this.props
 
     return (
+			
       <ScrollView
         scrollY
         style='height: 100%; width: calc(100% - 30px); box-sizing: border-box; padding: 9px 11px; margin: 0 15px; background: rgba(255,255,255,.5); border-radius: 5px; '>

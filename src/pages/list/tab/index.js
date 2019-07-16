@@ -118,8 +118,10 @@ class App extends Component {
             })
           }
         </View>
-        <View style={ `height: calc(100% - 44px);background: url(${ bgImg });background-size:100%;background-position:100% 100%;background-repeat:no-repeat;background-color:#7ccce6;` }>
+        <View style={ `height: calc(100% - 44px);background: url(${ bgImg });background-size:100%;background-position:100% 100%;background-repeat:no-repeat;position:relative;background-color:#7ccce6;` }>
           <View className='flex flex-justify-center flex-align-center' style='margin-bottom: 12px; padding-top: 31px; width: 100%; font-size: 14px; color: #104C5F'>
+						{currentTab === '50强' && <View style={ `position:absolute;top:5px;left:20px` }>50强公布时间：2019/7/29 17：00</View> }
+						{currentTab !== '50强' && currentTab !== '15强' && currentTab !== '3强' && <View style={ `position:absolute;top:5px;left:20px` }>海选时间：2019/7/15 00：00-2019/7/28 24：00</View> }
             <View>我的排名</View>
             <View style='margin: 0 23px 0 10px; color: #9B143B; font-size: 20px; font-weight: 700'>{ rank || '-' }</View>
             <View>我的票数</View>
